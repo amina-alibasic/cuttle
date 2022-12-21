@@ -99,15 +99,17 @@ export default {
     return {
       username: '',
       pw: '',
-      isLoggingIn: true,
       showSnackBar: false,
       snackBarMessage: '',
       loading: false,
     };
   },
   computed: {
-    isSigningUp() {
-      return !this.isLoggingIn;
+    currentRoutePath() {
+      return this.$route.path;
+    },
+    isLoggingIn() {
+      return this.currentRoutePath.includes('/login');
     },
     buttonText() {
       if (this.isLoggingIn) {
@@ -137,8 +139,14 @@ export default {
       }
     },
     switchMode() {
-      this.isLoggingIn = !this.isLoggingIn;
       this.pw = '';
+      // if user is currently on Log in screen, we want to switch to Sign Up
+      if (this.isLoggingIn) {
+        this.$router.push('/signup');
+      } else {
+        // else, user is on Sign up, switch back to Log In
+        this.$router.push('/login');
+      }
     },
     handleLogin() {
       this.username = '';

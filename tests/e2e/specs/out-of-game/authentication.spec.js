@@ -90,7 +90,7 @@ describe('Logging In', () => {
 describe('Signing Up', () => {
   beforeEach(() => {
     cy.wipeDatabase();
-    cy.visit('#/login');
+    cy.visit('#/signup');
     cy.get('[data-cy=switch-mode]').click(); // Switch to signup
   });
 
